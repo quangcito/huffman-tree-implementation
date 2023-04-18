@@ -8,8 +8,8 @@ class Node:
     self.occurences = occurences
     self.left = left
     self.right = right
-    self.code = None
-    
+    self.code = ''
+
   def __repr__(self):
     return repr({self.character:self.occurences})
 
