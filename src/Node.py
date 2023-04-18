@@ -3,9 +3,9 @@ class BST:
   several general binary tree algorithms, just so you can see them."""
 
 
-  def __init__(self, character, occurence, left = None, right = None):
+  def __init__(self, character, occurences, left = None, right = None):
     self.character = character
-    self.occurence = occurence
+    self.occurence = occurences
     self.left = left
     self.right = right
     self.code = None
