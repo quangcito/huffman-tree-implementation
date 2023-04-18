@@ -9,3 +9,7 @@ class Node:
     self.left = left
     self.right = right
     self.code = None
+    
+  def __repr__(self):
+    return repr({self.character:self.occurences})
+

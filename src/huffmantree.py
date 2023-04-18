@@ -11,7 +11,7 @@ def create_dictionary(text):
   text_dict = dict(sorted(text_dict.items(), key=lambda x:x[1], reverse=True))
   return text_dict
 
-print(create_dictionary("Hello"))
+# print(create_dictionary("Hello"))
 
 def huffman_encode(text):
   huffman_dict = create_dictionary(text)
@@ -31,8 +31,9 @@ def huffman_encode(text):
     huffman_nodes.append(combined_node)
 
   huffman_nodes.append(nodes[0])
-  
+
   return nodes
+  print(repr(nodes))
 
 print(huffman_encode("hello"))
 
