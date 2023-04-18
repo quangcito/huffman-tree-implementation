@@ -16,11 +16,10 @@ def create_dictionary(text):
 def huffman_encode(text):
   huffman_dict = create_dictionary(text)
   nodes = []
-  huffman_nodes = []
   for c in huffman_dict.keys():
     nodes.append(Node(c, huffman_dict.get(c)))
 
-  while not nodes and len(nodes) > 0:
+  while not nodes:
     left_node = nodes.pop()
     right_node = nodes.pop()
 
@@ -28,11 +27,10 @@ def huffman_encode(text):
     right_node.code = 1
 
     combined_node = Node(left_node.character + right_node.character, left_node.occurences + right_node.occurences, left_node, right_node)
-    huffman_nodes.append(combined_node)
+    nodes.append(combined_node)
+    sorted(nodes, key=lambda node:node.occurences, reverse=True)
 
-  huffman_nodes.append(nodes[0])
-
-  return nodes
+  return nodes[]
   print(repr(nodes))
 
 print(huffman_encode("hello"))
