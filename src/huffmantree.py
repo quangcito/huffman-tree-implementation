@@ -11,8 +11,6 @@ def create_dictionary(text):
   text_dict = dict(sorted(text_dict.items(), key=lambda x:x[1], reverse=True))
   return text_dict
 
-# print(create_dictionary("Hello"))
-
 def huffman_encode(text):
   huffman_dict = create_dictionary(text)
   nodes = []
@@ -33,15 +31,15 @@ def huffman_encode(text):
   return nodes[0]
 
 
-print(huffman_encode("hello"))
+# print(huffman_encode("hello"))
 
-node = huffman_encode("hello")
+# node = huffman_encode("hello")
 
-print(node)
+# print(node)
 
-print(node.left.left.code)
+# print(node.left.left.code)
 
-print(node.right.code)
+# print(node.right.code)
 
 # def get_code(node):
 #   while not node.left and not node.right:
@@ -58,6 +56,19 @@ def get_huffman_code(node, code=''):
     encoded_dict.update({node.character: new_code})
   return encoded_dict
 
-# print(get_huffman_code(huffman_encode("hello")))
+def askQuestion():
+  print("Type in a string you want to encode: \n")
+  encodedString = input()
+  huffman_tree = huffman_encode(encodedString)
+  print("Would you like to encode a text or decode a binary string? (encode/decode)\n")
+  answer = input()
+  if answer == 'encode':
+    print("Type in a text you want to encode: \n")
+    text = input()
+    # Helper method to check if all characters of the text is in the huffman tree
+    print(get_huffman_code(text))
+  if answer == 'decode':
+    print("Type in a binary string you want to decode: \n")
+    binary_string = input()
 
 print(get_huffman_code(node))
