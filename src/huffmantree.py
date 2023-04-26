@@ -17,7 +17,7 @@ def huffman_encode(text):
   nodes = []
   for c in huffman_dict.keys():
     # nodes.append(Node(c, huffman_dict.get(c)))
-    heapq.heappush(nodes, (c, huffman_dict.get(c)))
+    heapq.heappush(nodes, Node(c, huffman_dict.get(c)))
 
   while len(nodes) > 1:
     # left_node = nodes.pop()
