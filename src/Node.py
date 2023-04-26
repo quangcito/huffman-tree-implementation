@@ -12,3 +12,6 @@ class Node:
   def __repr__(self):
     return repr({self.character:self.occurences})
 
+  def __lt__(self, nxt):
+    return self.occurences < nxt.occurences
+

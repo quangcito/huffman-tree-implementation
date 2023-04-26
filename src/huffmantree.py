@@ -1,5 +1,6 @@
 from Node import Node
 from collections import defaultdict
+import heapq
 
 def create_dictionary(text):
   text_list = list(text)
@@ -15,18 +16,23 @@ def huffman_encode(text):
   huffman_dict = create_dictionary(text)
   nodes = []
   for c in huffman_dict.keys():
-    nodes.append(Node(c, huffman_dict.get(c)))
+    # nodes.append(Node(c, huffman_dict.get(c)))
+    heapq.heappush(nodes, (c, huffman_dict.get(c)))
 
   while len(nodes) > 1:
-    left_node = nodes.pop()
-    right_node = nodes.pop()
+    # left_node = nodes.pop()
+    # right_node = nodes.pop()
+    left_node = heapq.heappop(nodes)
+    right_node = heapq.heappop(nodes)
 
     left_node.code = 0
     right_node.code = 1
 
     combined_node = Node(left_node.character + right_node.character, left_node.occurences + right_node.occurences, left_node, right_node)
-    nodes.append(combined_node)
-    sorted(nodes, key=lambda node:node.occurences, reverse=True)
+    # nodes.append(combined_node)
+    heapq.heappush(nodes, combined_node)
+    # sorted(nodes, key=lambda node:node.occurences, reverse=True)
+    # sorted(nodes, key=lambda node:node.occurences)
 
   return nodes[0]
 
@@ -56,28 +62,28 @@ def get_huffman_code(node, code=''):
     encoded_dict.update({node.character: new_code})
   return encoded_dict
 
-def encodeTextFromDict(text,dict):
-  encodedText = ""
-  for c in text: 
+def encode_text_from_dict(text,dict):
+  encoded_text = ""
+  for c in text:
       if c in dict:
-        encodedText += dict.get(c)
+        encoded_text += dict.get(c)
       else:
         return "Your input string is not applicable with the huffman tree constructed from your encoded string"
-  return encodedText
+  return encoded_text
 
-def askQuestion():
+def ask_question():
   print("Type in a string you want to encode: \n")
-  encodedString = input()
-  huffman_tree_dict = get_huffman_code(huffman_encode(encodedString))
+  encoded_string = input()
+  huffman_tree_dict = get_huffman_code(huffman_encode(encoded_string))
   print("Would you like to encode a text or decode a binary string? (encode/decode)\n")
   answer = input()
   if answer == 'encode':
     print("Type in a text you want to encode: \n")
     text = input()
-    print(huffman_encode(encodedString))
+    print(huffman_encode(encoded_string))
     print(huffman_tree_dict)
-    print(encodeTextFromDict(text,huffman_tree_dict))
-    
+    print(encode_text_from_dict(text, huffman_tree_dict))
+
     # Helper method to check if all characters of the text is in the huffman tree
   if answer == 'decode':
     print("Type in a binary string you want to decode: \n")
@@ -85,4 +91,4 @@ def askQuestion():
 
 # print(get_huffman_code(node))
 
-askQuestion()
+ask_question()
