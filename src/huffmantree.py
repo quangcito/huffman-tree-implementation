@@ -62,6 +62,26 @@ def get_huffman_code(node, code=''):
     encoded_dict.update({node.character: new_code})
   return encoded_dict
 
+
+
+def traverseTree(node, binaryString):
+  for num in binaryString:
+    if num == 0 and node.left:
+      node = node.left
+    elif num == 1 and node.right:
+      node = node.right
+    
+  binaryString = binaryString.replace(node.code,"")
+  return node.character
+
+
+def decodeText(node, binaryString):
+  decodedText = ""
+  while binaryString:
+    decodedText += traverseTree(node,binaryString)
+  return decodedText
+  
+    
 def encode_text_from_dict(text,dict):
   encoded_text = ""
   for c in text:
@@ -71,23 +91,26 @@ def encode_text_from_dict(text,dict):
         return "Your input string is not applicable with the huffman tree constructed from your encoded string"
   return encoded_text
 
+
+
+  
 def ask_question():
   print("Type in a string you want to encode: \n")
   encoded_string = input()
-  huffman_tree_dict = get_huffman_code(huffman_encode(encoded_string))
+  root = huffman_encode(encoded_string)
+  huffman_tree_dict = get_huffman_code(root)
   print("Would you like to encode a text or decode a binary string? (encode/decode)\n")
   answer = input()
   if answer == 'encode':
     print("Type in a text you want to encode: \n")
     text = input()
-    print(huffman_encode(encoded_string))
-    print(huffman_tree_dict)
     print(encode_text_from_dict(text, huffman_tree_dict))
 
     # Helper method to check if all characters of the text is in the huffman tree
   if answer == 'decode':
     print("Type in a binary string you want to decode: \n")
     binary_string = input()
+    print(decodeText(root,binary_string))
 
 # print(get_huffman_code(node))
 
