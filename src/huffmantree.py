@@ -66,14 +66,14 @@ def get_huffman_code(node, code=''):
 
 def traverseTree(node, binaryString):
   print(type(binaryString))
-  for i in range(len(binaryString) - 1):
-    if binaryString[i] == "0" and node.left:
+  for i in range(len(binaryString) + 1):
+    if (not node.left and not node.right):
+      binaryString = binaryString[i:]
+      return [node.character, binaryString]
+    elif binaryString[i] == "0" and node.left:
       node = node.left
     elif binaryString[i] == "1" and node.right:
       node = node.right
-    else:
-      binaryString = binaryString[i:]
-      return [node.character, binaryString]
 
 
   # for num in binaryString:
@@ -91,6 +91,7 @@ def decodeText(node, binaryString):
   decodedText = ""
   while binaryString:
     traversal_result = traverseTree(node, binaryString)
+    print(traversal_result)
     decodedText += traversal_result[0]
     binaryString = traversal_result[1]
   return decodedText
@@ -113,6 +114,7 @@ def ask_question():
   encoded_string = input()
   root = huffman_encode(encoded_string)
   huffman_tree_dict = get_huffman_code(root)
+  print(huffman_tree_dict)
   print("Would you like to encode a text or decode a binary string? (encode/decode)\n")
   answer = input()
   if answer == 'encode':
