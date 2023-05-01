@@ -30,9 +30,9 @@ def huffman_encode(text):
 
   return nodes[0]
 
-
+encoded_dict = {}
 def get_huffman_code(node, code=''):
-  encoded_dict = {}
+
   new_code = code + str(node.code)
   if node.left:
     get_huffman_code(node.left, new_code)
@@ -72,33 +72,32 @@ def encode_text_from_dict(text,dict):
   return encoded_text
 
 
-def ask_string_to_encode():
-  print("Type in a string you want to encode: \n")
-  encoded_string = input()
-  root = huffman_encode(encoded_string)
-  huffman_tree_dict = get_huffman_code(root)
-  ask_questions(root,huffman_tree_dict)
-  
-    
-def ask_questions(root,dict):
-  print("Would you like to encode a text or decode a binary string? (encode/decode/cancel)\n")
-  answer = input()
-  if answer == 'cancel':
-    return
-  if answer == 'encode':
-    print("Type in a text you want to encode: \n")
-    text = input()
-    encode_text_from_dict(text,dict)
-    # Helper method to check if all characters of the text is in the huffman tree
-  if answer == 'decode':
-    print("Type in a binary string you want to decode: \n")
-    binary_string = input()
-    print(decodeText(root,binary_string))
-  else: 
-    print("That's an invalid input. Please try a different input.")
-    ask_questions(root,dict)
+def ask_questions():
+    print("Type in a string you want to encode: \n")
+    encoded_string = input()
+    root = huffman_encode(encoded_string)
+    huffman_tree_dict = get_huffman_code(root)
+    while True:
+      print("Would you like to encode a text or decode a binary string? (encode/decode/cancel)\n")
+      answer = input()
+      if answer == 'cancel':
+        return
+      elif answer == 'encode':
+        print("Type in a text you want to encode: \n")
+        text = input()
+        print(encode_text_from_dict(text,huffman_tree_dict))
+        continue
+        # Helper method to check if all characters of the text is in the huffman tree
+      elif answer == 'decode':
+        print("Type in a binary string you want to decode: \n")
+        binary_string = input()
+        print(decodeText(root,binary_string))
+        continue
+      else: 
+        print("That's an invalid input. Please try a different input.")
+        continue
   
 
-ask_string_to_encode()
+ask_questions()
 
 
