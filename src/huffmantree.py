@@ -85,18 +85,18 @@ def ask_questions():
       elif answer == 'encode':
         print("Type in a text you want to encode: \n")
         text = input()
-        print(encode_text_from_dict(text,huffman_tree_dict))
+        print("Result: " + encode_text_from_dict(text,huffman_tree_dict) + "\n")
         continue
         # Helper method to check if all characters of the text is in the huffman tree
       elif answer == 'decode':
         print("Type in a binary string you want to decode: \n")
         binary_string = input()
-        print(decodeText(root,binary_string))
+        print("Result: " + decodeText(root,binary_string) + "\n")
         continue
-      else: 
+      else:
         print("That's an invalid input. Please try a different input.")
         continue
-  
+
 
 ask_questions()
 
