@@ -73,7 +73,7 @@ def traverseTree(node, binaryString):
       node = node.right
     else:
       binaryString = binaryString[i:]
-      return node.character
+      return [node.character, binaryString]
 
 
   # for num in binaryString:
@@ -89,8 +89,10 @@ def traverseTree(node, binaryString):
 
 def decodeText(node, binaryString):
   decodedText = ""
-  # while binaryString:
-  decodedText += traverseTree(node,binaryString)
+  while binaryString:
+    traversal_result = traverseTree(node, binaryString)
+    decodedText += traversal_result[0]
+    binaryString = traversal_result[1]
   return decodedText
 
 
