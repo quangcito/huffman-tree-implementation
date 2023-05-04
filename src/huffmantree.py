@@ -42,23 +42,23 @@ def get_huffman_code(node, code=''):
   return encoded_dict
 
 
-def traverseTree(node, binaryString):
-  for i in range(len(binaryString) + 1):
+def traverse_tree(node, binary_string):
+  for i in range(len(binary_string) + 1):
     if (not node.left and not node.right):
-      binaryString = binaryString[i:]
-      return [node.character, binaryString]
-    elif binaryString[i] == "0" and node.left:
+      binary_string = binary_string[i:]
+      return [node.character, binary_string]
+    elif binary_string[i] == "0" and node.left:
       node = node.left
-    elif binaryString[i] == "1" and node.right:
+    elif binary_string[i] == "1" and node.right:
       node = node.right
 
-def decodeText(node, binaryString):
-  decodedText = ""
-  while binaryString:
-    traversal_result = traverseTree(node, binaryString)
-    decodedText += traversal_result[0]
-    binaryString = traversal_result[1]
-  return decodedText
+def decode_text(node, binary_string):
+  decoded_text = ""
+  while binary_string:
+    traversal_result = traverse_tree(node, binary_string)
+    decoded_text += traversal_result[0]
+    binary_string = traversal_result[1]
+  return decoded_text
 
 
 def encode_text_from_dict(text,dict):
@@ -76,7 +76,7 @@ def ask_questions():
     encoded_string = input()
     root = huffman_encode(encoded_string)
     huffman_tree_dict = get_huffman_code(root)
-    
+
     while True:
       print("Would you like to encode a text or decode a binary string? (encode/decode/cancel)\n")
       answer = input()
@@ -91,7 +91,7 @@ def ask_questions():
       elif answer == 'decode':
         print("Type in a binary string you want to decode: \n")
         binary_string = input()
-        print("Result: " + decodeText(root,binary_string) + "\n")
+        print("Result: " + decode_text(root,binary_string) + "\n")
         continue
       else:
         print("That's an invalid input. Please try a different input.")
